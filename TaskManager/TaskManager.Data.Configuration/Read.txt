@@ -1,0 +1,3 @@
+﻿
+    dotnet ef migrations add Initial --startup-project ../TaskManagerAPI
+    dotnet ef database update --startup-project ../TaskManagerAPI
