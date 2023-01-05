@@ -1,18 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace TaskManager.Data.Models
 {
-    public class Project
+    public class Department
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid ID { get; set; }
-        public string? Name { get; set; }
-        public string? Code { get; set; }
-        public string? Status { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        [Required(ErrorMessage = "Please specify a Name")]
+        public string?Name { get; set; }
+        public string? Location { get; set; }
+        public string? ManagerName { get; set; }
         public Guid CreatedById { get; set; }
         public Guid ModifiedById { get; set; }
         public DateTime DateModified { get; set; } = DateTime.UtcNow;

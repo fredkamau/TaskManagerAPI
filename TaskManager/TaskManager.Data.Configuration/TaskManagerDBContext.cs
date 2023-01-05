@@ -12,5 +12,8 @@ namespace TaskManager.Data.Configuration
         }
 
         public DbSet<Project> Projects { get; set; } = null!;
+        public DbSet<Department> Departments { get; set; } = null!;
+        public DbSet<Employee> Employees { get; set; } = null!;
+        public DbSet<Models.Task> Tasks { get; set; } = null!;
     }
 }

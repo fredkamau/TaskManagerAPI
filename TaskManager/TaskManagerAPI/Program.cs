@@ -14,7 +14,10 @@ builder.Services.AddDbContext<TaskManagerDBContext>(options =>
 
 });
 builder.Services.AddMediatR(AppDomain.CurrentDomain.Load("TaskManager.Core"));
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

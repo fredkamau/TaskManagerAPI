@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManager.Data.Configuration;
 
@@ -11,9 +12,10 @@ using TaskManager.Data.Configuration;
 namespace TaskManager.Data.Configuration.Migrations
 {
     [DbContext(typeof(TaskManagerDBContext))]
-    partial class TaskManagerDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230105083537_AddedEmployeeModel")]
+    partial class AddedEmployeeModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,54 +152,6 @@ namespace TaskManager.Data.Configuration.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("TaskManager.Data.Models.Task", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("CreatedById")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("EmployeeID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ModifiedById")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PriorityLevel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ProjectID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("EmployeeID");
-
-                    b.HasIndex("ProjectID");
-
-                    b.ToTable("Tasks");
-                });
-
             modelBuilder.Entity("TaskManager.Data.Models.Employee", b =>
                 {
                     b.HasOne("TaskManager.Data.Models.Department", "Departments")
@@ -207,25 +161,6 @@ namespace TaskManager.Data.Configuration.Migrations
                         .IsRequired();
 
                     b.Navigation("Departments");
-                });
-
-            modelBuilder.Entity("TaskManager.Data.Models.Task", b =>
-                {
-                    b.HasOne("TaskManager.Data.Models.Employee", "Employees")
-                        .WithMany()
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TaskManager.Data.Models.Project", "Projects")
-                        .WithMany()
-                        .HasForeignKey("ProjectID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employees");
-
-                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }
